@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: simple-eureka-server
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+  instance:
+    hostname: peer1
+    prefer-ip-address: true
+
+
+
+#security:
+#  basic:
+#    enabled: true
+#  user:
+#    name: admin
+#    password: admin
