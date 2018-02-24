@@ -1,1 +1,1 @@
-# A simple Spring Cloud demo project
+# A simple Spring Cloud sample project
