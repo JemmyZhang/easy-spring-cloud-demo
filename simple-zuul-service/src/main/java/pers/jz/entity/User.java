@@ -1,25 +1,40 @@
 package pers.jz.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
  * @author jemmyzhang on 2018/2/23.
  */
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     private String username;
 
     private String password;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private List<String> authorityValues;
+
+    public User(String username, String password, List<String> authorityValues) {
+        this.username = username;
+        this.password = password;
+        this.authorityValues = authorityValues;
+    }
+
+    public User() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        List<GrantedAuthority> list = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(authorityValues)) {
+            authorityValues.stream().forEach((var)->list.add(new SimpleGrantedAuthority(var)));        }
+        return list;
     }
 
     @Override
@@ -34,7 +49,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -44,7 +59,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -60,16 +75,11 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
+    public List<String> getAuthorityValues() {
+        return authorityValues;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", authorities=" + authorities +
-                '}';
+    public void setAuthorityValues(List<String> authorityValues) {
+        this.authorityValues = authorityValues;
     }
 }

@@ -16,16 +16,16 @@ public class User implements UserDetails {
 
     private Long id;
 
-    private String name;
+    private String username;
 
     private String password;
 
-    private List<String> authorities;
+    private List<String> authorityValues;
 
-    public User(String name,String password, List<String> authorities) {
-        this.name = name;
+    public User(String username,String password, List<String> authorityValues) {
+        this.username = username;
         this.password = password;
-        this.authorities=authorities;
+        this.authorityValues=authorityValues;
     }
 
     public User() {
@@ -39,14 +39,6 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -57,14 +49,18 @@ public class User implements UserDetails {
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list=new ArrayList<>();
-        if(Objects.nonNull(authorities)){
-            authorities.stream().forEach((var)->list.add(new SimpleGrantedAuthority(var)));
+        if(Objects.nonNull(authorityValues)){
+            authorityValues.stream().forEach((var)->list.add(new SimpleGrantedAuthority(var)));
         }
         return list;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getUsername() {
-        return name;
+        return username;
     }
 
     public boolean isAccountNonExpired() {
@@ -81,5 +77,13 @@ public class User implements UserDetails {
 
     public boolean isEnabled() {
         return true;
+    }
+
+    public List<String> getAuthorityValues() {
+        return authorityValues;
+    }
+
+    public void setAuthorityValues(List<String> authorityValues) {
+        this.authorityValues = authorityValues;
     }
 }
