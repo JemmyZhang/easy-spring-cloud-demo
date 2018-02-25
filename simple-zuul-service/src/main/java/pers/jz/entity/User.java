@@ -82,4 +82,13 @@ public class User implements UserDetails {
     public void setAuthorityValues(List<String> authorityValues) {
         this.authorityValues = authorityValues;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authorityValues=" + authorityValues +
+                '}';
+    }
 }

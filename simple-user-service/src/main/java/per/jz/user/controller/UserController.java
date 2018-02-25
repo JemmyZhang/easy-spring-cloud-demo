@@ -1,10 +1,9 @@
 package per.jz.user.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import per.jz.user.service.UserService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,13 +14,21 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    @Resource
+    UserService userService;
+
     @GetMapping({"","/"})
     public String user(){
         return "User Info!";
     }
 
-    @RequestMapping(value = "/mapping",method = RequestMethod.GET)
-    public String mapping(){
-        return "mapping";
+    @GetMapping("/{id}")
+    public String findUser(@PathVariable Long id){
+        return "get user id = "+id;
+    }
+
+    @GetMapping("/favors")
+    public List<String> findUserFavorites(){
+        return userService.findUserFavoriteMovies();
     }
 }
