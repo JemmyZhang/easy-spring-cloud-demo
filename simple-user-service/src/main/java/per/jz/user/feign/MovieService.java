@@ -14,4 +14,7 @@ public interface MovieService {
 
     @RequestMapping(method = RequestMethod.GET,value = "/movies")
     public List<String> getMovieList();
+
+    @RequestMapping(method = RequestMethod.GET,value = "/exception")
+    public String exceptionTest();
 }

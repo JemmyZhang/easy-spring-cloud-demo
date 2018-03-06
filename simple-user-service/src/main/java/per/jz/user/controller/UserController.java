@@ -31,4 +31,9 @@ public class UserController {
     public List<String> findUserFavorites(){
         return userService.findUserFavoriteMovies();
     }
+
+    @GetMapping("/exception")
+    public String exceptionTest(){
+        return userService.exceptionTest();
+    }
 }

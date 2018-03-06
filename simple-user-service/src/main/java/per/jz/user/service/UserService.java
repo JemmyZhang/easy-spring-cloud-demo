@@ -19,4 +19,8 @@ public class UserService {
     public List<String> findUserFavoriteMovies(){
         return movieService.getMovieList();
     }
+
+    public String exceptionTest(){
+        return movieService.exceptionTest();
+    }
 }
