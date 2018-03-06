@@ -2,6 +2,7 @@ package pers.jz.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pers.jz.exception.RestException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,5 +26,10 @@ public class HomeController {
         list.add("Iron Man 3");
         list.add("Captain America");
         return list;
+    }
+
+    @GetMapping("/exception")
+    public void exceptionGet() {
+        throw new RestException(123123L, "Exception Message.");
     }
 }
